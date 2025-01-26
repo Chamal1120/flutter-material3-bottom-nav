@@ -20,6 +20,14 @@ class HomePage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          Text(
+            'With GetX',
+            style: TextStyle(
+              color: flavor.green,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           SizedBox(
             height: 30.0,
           ),
@@ -36,7 +44,7 @@ class HomePage extends StatelessWidget {
           ),
           Text(
             '''
-            This is done using the the NavigationBar flutter widget. It is buit-in to flutter and very easy to use. You just need to pass a List of NavigationDestination widgets to destination property and those will be shown on the screen as navigation menu items. Then you can use a callback function with the onDestinationSelected property to trigger an action when a user taps on a perticular item in a navigation menu item.
+            This is using the same material3 NavigationBar but navigation is handled by the GetX state mmanagement library (package). GetX abstracts a lot cumbersome tasks in setate and provide a clean and concise code. GetX also helps to reduce the number of stateful widgets as state mmanagement was handled seperately using it's own method which will save a lot of RAM from the running device.
           ''',
             textAlign: TextAlign.justify,
             style: TextStyle(
@@ -50,7 +58,7 @@ class HomePage extends StatelessWidget {
                 throw Exception('Could not launch ${link.url}');
               }
             },
-            text: "More info at: https://api.flutter.dev/flutter/material/NavigationBar-class.html",
+            text: "More info at: https://chornthorn.github.io/getx-docs/",
             style: TextStyle(
               color: Colors.white,
               fontSize: 15.0,
