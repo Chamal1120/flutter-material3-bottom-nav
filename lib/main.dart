@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bottom_nav_bar/views/home.dart';
-import 'package:flutter_bottom_nav_bar/views/about.dart';
+import 'package:flutter_bottom_nav_bar/screens/home.dart';
+import 'package:flutter_bottom_nav_bar/screens/about.dart';
 import 'package:catppuccin_flutter/catppuccin_flutter.dart';
 
 Flavor flavor = catppuccin.mocha;
