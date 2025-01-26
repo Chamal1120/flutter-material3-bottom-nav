@@ -1,4 +1,4 @@
-# Flutter Bottom Navigation Bar (New material 3 design)
+# Flutter Bottom Navigation Bar with Setstate (New material 3 design)
 
 A simple flutter bottom navbar implementation for the Mobile Application Development Module.
 
