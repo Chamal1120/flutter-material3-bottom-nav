@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bottom_nav_bar/controllers/nav_controller.dart';
+import 'package:get/get.dart';
 import 'package:flutter_bottom_nav_bar/screens/home.dart';
 import 'package:flutter_bottom_nav_bar/screens/about.dart';
 import 'package:catppuccin_flutter/catppuccin_flutter.dart';
@@ -22,64 +24,63 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         navigationBarTheme: NavigationBarThemeData(
-          backgroundColor: flavor.crust,
-          indicatorColor: flavor.lavender,
-          labelTextStyle: WidgetStateProperty.resolveWith(
-            (Set<WidgetState> states) {
-              if (states.contains(WidgetState.selected)) {
-                return TextStyle(color: flavor.subtext1);
-              } else {
-                return TextStyle(color: flavor.subtext0);
-              }
-            },
-          ),
-          iconTheme: WidgetStateProperty.resolveWith(
-            (Set<WidgetState> states) {
-              if (states.contains(WidgetState.selected)) {
-                return IconThemeData(color: flavor.crust);
-              } else {
-                return IconThemeData(color: flavor.subtext1);
-              }
-            },
-          )
-        ),
+            backgroundColor: flavor.crust,
+            indicatorColor: flavor.lavender,
+            labelTextStyle: WidgetStateProperty.resolveWith(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
+                  return TextStyle(color: flavor.subtext1);
+                } else {
+                  return TextStyle(color: flavor.subtext0);
+                }
+              },
+            ),
+            iconTheme: WidgetStateProperty.resolveWith(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
+                  return IconThemeData(color: flavor.crust);
+                } else {
+                  return IconThemeData(color: flavor.subtext1);
+                }
+              },
+            )),
       ),
       home: NavBarM3(),
     );
   }
 }
 
-class NavBarM3 extends StatefulWidget {
-  const NavBarM3({super.key});
+class NavBarM3 extends StatelessWidget {
+  NavBarM3({super.key});
 
-  @override
-  State<NavBarM3> createState() => _NavBarM3State();
-}
+  final List<Widget> pages = [HomePage(), AboutPage()];
 
-class _NavBarM3State extends State<NavBarM3> {
-  int currentPageIndex = 0;
-  List<Widget> pages = [HomePage(), AboutPage()];
+  final NavController navController = Get.put(NavController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(
-            () {
-              currentPageIndex = index;
+      bottomNavigationBar: Obx(
+        () {
+          return NavigationBar(
+            onDestinationSelected: (int index) {
+              navController.changePage(index);
             },
+            destinations: const <Widget>[
+              NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+              NavigationDestination(icon: Icon(Icons.info), label: 'About'),
+            ],
+            selectedIndex: navController.selectedPage.value,
           );
         },
-        destinations: const <Widget>[
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.info), label: 'About'),
-        ],
-        selectedIndex: currentPageIndex,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: pages[currentPageIndex],
+      body: Obx(
+        () {
+          return Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: pages[navController.selectedPage.value],
+          );
+        },
       ),
       appBar: AppBar(
         backgroundColor: flavor.crust,
