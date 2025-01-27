@@ -1,0 +1,6 @@
+# Ignore all files from linguist statistics by default
+* linguist-generated
+
+# Override the linguist to count dart files for statistics 
+*.dart -linguist-generated
+
